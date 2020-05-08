@@ -8,9 +8,16 @@ public class Move : MonoBehaviour
 
     public float turnSpeed;
 
+    public float jumpforce = 10.0f;
+
+    private bool isJumping = false;
+
+    private Rigidbody rb;
+
+
     void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
     }
       
 
@@ -19,7 +26,12 @@ public class Move : MonoBehaviour
   
     void Update()
     {
-       float currentSpeed = 0.0f;
+      
+
+    }
+    void FixedUpdate()
+    {
+         float currentSpeed = 0.0f;
        float currentTurnAmount = 0.0f;
 
        if (Input.GetKey(KeyCode.A)) 
@@ -38,9 +50,17 @@ public class Move : MonoBehaviour
        {
            currentSpeed = -speed.x;
        }
-
+       
         gameObject.transform.Rotate(Vector3.up, currentTurnAmount * Time.deltaTime);
-        gameObject.transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+      
+        rb.AddForce(transform.forward * currentSpeed * Time.deltaTime,ForceMode.Impulse);
+  
+        if (Input.GetKeyUp(KeyCode.Space) && !isJumping)
+        {
+            isJumping = true;
+            rb.AddForce(Vector3.up * jumpforce, ForceMode.Impulse);
+        }
+        rb.angularVelocity = Vector3.zero;
 
-    }
+  }
   }
