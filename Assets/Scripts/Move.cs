@@ -5,32 +5,42 @@ using UnityEngine;
 public class Move : MonoBehaviour
 {
     public Vector3 speed;
+
+    public float turnSpeed;
+
     void Start()
     {
         
     }
       
-    // Update is called once per frame
+
+       
+    
+  
     void Update()
     {
-        Vector3 currentSpeed = Vector3.zero;
+       float currentSpeed = 0.0f;
+       float currentTurnAmount = 0.0f;
 
-          if (Input.GetKeyDown(KeyCode.A))
-        {
-            currentSpeed.x = -speed.x;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            currentSpeed.x = speed.x;
-        }
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            currentSpeed.z= speed.z;
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            currentSpeed.z = -speed.z;
-        }
-        gameObject.transform.Translate(currentSpeed * Time.deltaTime);
+       if (Input.GetKey(KeyCode.A)) 
+       {
+           currentTurnAmount -= turnSpeed;
+       }
+       if (Input.GetKey(KeyCode.D)) 
+       {
+           currentTurnAmount += turnSpeed;
+       }
+       if (Input.GetKey(KeyCode.W)) 
+       {
+           currentSpeed = speed.x;
+       }
+       if (Input.GetKey(KeyCode.S)) 
+       {
+           currentSpeed = -speed.x;
+       }
+
+        gameObject.transform.Rotate(Vector3.up, currentTurnAmount * Time.deltaTime);
+        gameObject.transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+
     }
-}
+  }
