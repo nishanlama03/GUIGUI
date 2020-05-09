@@ -28,11 +28,23 @@ public class Bullet : MonoBehaviour
        if (currentLife >= lifeSpan )
        {
            Destroy(gameObject);
+  
        }
+    }
+    void OnCollisionEnter(Collision other)
+  {
+    
+    {
+          Destroy(this.gameObject);
+    }
+     
+  }
+    
+ 
+      
+
 
     
-
-    }
 
   
    
