@@ -22,8 +22,8 @@ public class Bullet : MonoBehaviour
     void Update()
     {
        
-       
-           currentLife += 1.0f * Time.deltaTime;
+       //Making the gameObject destroy itself after it reaches 3.0f (lifespan)
+           currentLife += Time.deltaTime; //Time.deltaTime:
        
        if (currentLife >= lifeSpan )
        {
@@ -31,11 +31,11 @@ public class Bullet : MonoBehaviour
   
        }
     }
-    void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter(Collision collision)
   {
-    
+      if (collision.gameObject.CompareTag("Ground"))
     {
-          Destroy(this.gameObject);
+          Destroy(gameObject);
     }
      
   }
