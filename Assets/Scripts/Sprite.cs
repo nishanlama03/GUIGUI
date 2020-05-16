@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteMover : MonoBehaviour
+public class Sprite : MonoBehaviour
 {
     public float speed = 5;
     public float jumpSpeed = 2.0f;
