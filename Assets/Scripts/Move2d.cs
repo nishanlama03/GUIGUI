@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Move2d : MonoBehaviour
 {
-    public float moveSpeed;
+    public float speed = 5 ;
      
      public float jumpforce;
 
@@ -12,10 +12,16 @@ public class Move2d : MonoBehaviour
 
      
 
+
+
+     
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D> ();
+        distancetoGround = GetComponent<Collider2D>().bounds.extents.y;
+
     }
 
     // Update is called once per frame
@@ -23,18 +29,32 @@ public class Move2d : MonoBehaviour
     {
         
     }
-
+bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, distanceToGround + 0.1f);
+//        return (Mathf.Abs(rb.velocity.y) < Mathf.Epsilon);
+    }
     void FixedUpdate()
     {
-        float move = Input.GetAxis("Horizontal");
+        float currentSpeed = 0.0f;
 
-        rb.velocity = new Vector2(move * moveSpeed, rb.velocity.y);
-
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2 (rb.velocity.x,jumpforce);
+            currentSpeed -= speed;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            currentSpeed += speed;
         }
 
+       
+        if (Input.GetKey(KeyCode.Space) && (isGrounded || jumpCount < 2))
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            
+        }
+
+        rb.angularVelocity = Vector3.zero;
 
 
 
