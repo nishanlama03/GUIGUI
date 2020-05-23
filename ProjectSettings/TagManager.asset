@@ -8,6 +8,7 @@ TagManager:
   - Bulletsthrown
   - Bullet
   - Ground
+  - Coins
   layers:
   - Default
   - TransparentFX
