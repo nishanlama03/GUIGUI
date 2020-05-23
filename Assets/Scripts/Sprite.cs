@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Sprite : MonoBehaviour
-{    //Variables exposed to Unity Inspector
+{    
+    //Variables exposed to Unity Inspector
     public float speed = 5;
     public float jumpSpeed = 2.0f;
 
@@ -12,7 +15,6 @@ public class Sprite : MonoBehaviour
     private float distanceToGround = 0.0f;
     private bool isJumping = false;
     private LayerMask mask;
-    private Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -68,13 +70,4 @@ public class Sprite : MonoBehaviour
             isJumping = false;   //Immediately stop jumping
         }
     }
-     private void OnTriggerEnter2D(Collider2D other)
-     {
-         if (other.gameObject.CompareTag("Coins"))
-        {
-         Destroy (other.gameObject);
-        }
-     }
- 
-    
 }
